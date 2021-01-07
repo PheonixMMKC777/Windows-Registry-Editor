@@ -1,5 +1,24 @@
 @ECHO OFF
 
+:HOME
+CD %USERPROFILE%/Appdata
+IF EXIST Blondekid (ECHO PARSING!) ELSE (MD Blondekid)
+CD Blondekid
+ECHO WHAT PROGRAM DO YOU WANT?
+ECHO 1 = HILIGHT EDITOR
+ECHO 2 = SUMTHIN
+ECHO H = HELP
+CHOICE /C 12H
+IF ERRORLEVEL ==3 GOTO HELP
+IF ERRORLEVEL ==2 PAUSE 
+IF ERRORLEVEL ==1 GOTO START
+
+:HELP
+ECHO =======================================
+ECHO THIS IS HELP
+ECHO =======================================
+GOTO HOME
+
 :START
 TITLE BlondeKid's Hilight Editor
 ECHO =======================================
@@ -21,3 +40,4 @@ IF ERROELEVEL ==1 GOTO SAVE
 :SAVE
 ECHO [HKEY_CURRENT_USER\Control Panel\Colors] >>HILIGHTEDITOR.REG
 ECHO "Hilight"=" %r% %g% %b%" >>HILIGHTEDITOR.REG
+START
