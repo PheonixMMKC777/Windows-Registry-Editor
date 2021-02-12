@@ -1,11 +1,12 @@
 @ECHO OFF
 title Blondekid's Win10RegistryEditor
 REM PROPERTY OF BLONDEKID!! IF YOU WANT TO SCREW WITH IT MAKE A FORK ON GITHUB!!
+color 03
 
 setlocal enabledelayedexpansion
 :HOME
 CD %USERPROFILE%/Appdata
-IF EXIST Blondekid (ECHO PARSING!) ELSE (MD Blondekid)
+IF EXIST Blondekid (ECHO File check passed) ELSE (MD Blondekid)
 CD Blondekid
 ECHO Which Program do you want?
 ECHO 1 = Hilight Editor
@@ -17,7 +18,7 @@ CHOICE /C 1234H
 IF ERRORLEVEL ==5 GOTO HELP
 IF ERRORLEVEL ==4 GOTO NOTREADY
 IF ERRORLEVEL ==3 GOTO DSBCTA
-IF ERRORLEVEL ==2 GOTO NOTREADY
+IF ERRORLEVEL ==2 GOTO CPANC
 IF ERRORLEVEL ==1 GOTO HLSTART
 
 REM HEY DUMMY REMEBER TO FINISH
@@ -33,6 +34,12 @@ GOTO HOME
 :HELP
 ECHO =======================================
 ECHO Hilight Editor - A tool that edits the way text is hilighted, Like on your desktop icons and text.
+ECHO =======================================
+ECHO Custom control panel function - Adds a custom control panel function that does what you define.
+ECHO =======================================
+ECHO Disable Cortana - Truly Disables Cortana :)
+ECHO =======================================
+ECHO Custom CMD Font - Takes a .TTF You Define and loads it into the command prompt.
 ECHO =======================================
 GOTO HOME
 
@@ -73,7 +80,7 @@ SET /P GUID1=Enter a GUID:
 SET /P CPLNAME=What is the name of this: 
 SET /P CPLDESC=Give a short description of what this does: 
 SET /P DEFICON=Enter path to default icon: 
-GOTO SAVEPANC
+GOTO SAVECPANC
 
 
 
@@ -83,8 +90,11 @@ GOTO SAVEPANC
 ECHO Windows Registry Editor Version 5.00 >>CPANC.REG
 ECHO. >>CPANC.REG
 ECHO [HKEY_CLASSES_ROOT\CLSID] >>CPANC.REG
-ECHO REG ADD \\HKEY_CLASSES_ROOT\CLSID\GUID1! /VE /T REG_SZ /D !CPLNAME! >>CPANC.REG
-ECHO REG ADD \\HKEY_CLASSES_ROOT\CLSID /V InfoTip /T REG_SZ /D !CPLDESC! >>CPANC.REG
+ECHO REG ADD !GUID1! /VE /T REG_SZ /D !CPLNAME! >>CPANC.REG
+
+ECHO [HKEY_CLASSES_ROOT\CLSID\!GUID1!] >>CPANC.REG
+ECHO REG ADD /V InfoTip /T REG_SZ /D !CPLDESC! >>CPANC.REG
+ECHO REG ADD DefaultIcon /VE /T REG_SZ /D !DEFICON! >>CPANC.REG
 
 CMD /K
 
