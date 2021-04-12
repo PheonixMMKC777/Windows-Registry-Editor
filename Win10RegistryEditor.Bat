@@ -8,12 +8,15 @@ setlocal enabledelayedexpansion
 CD %USERPROFILE%/Appdata
 IF EXIST Blondekid (ECHO File check passed) ELSE (MD Blondekid)
 CD Blondekid
+
 ECHO Which Program do you want?
+
 ECHO 1 = Hilight Editor
 ECHO 2 = Custom Control Panel Function
 ECHO 3 = Disable Cortana
 ECHO 4 = Custom CMD font
 ECHO H = HELP
+
 CHOICE /C 1234H
 IF ERRORLEVEL ==5 GOTO HELP
 IF ERRORLEVEL ==4 GOTO NOTREADY
@@ -23,7 +26,6 @@ IF ERRORLEVEL ==1 GOTO HLSTART
 
 REM HEY DUMMY REMEBER TO FINISH
 rem CMDFC
-rem CPANC
 
 :NOTREADY
 ECHO =======================================
@@ -73,6 +75,7 @@ ECHO. >>HILIGHTEDITOR.REG
 ECHO [HKEY_CURRENT_USER\Control Panel\Colors] >>HILIGHTEDITOR.REG
 ECHO "Hilight"="!rh! !gh! !bh!" >>HILIGHTEDITOR.REG
 START HILIGHTEDITOR.REG
+GOTO WIPE
 
 
 :CPANC
@@ -96,7 +99,8 @@ ECHO [HKEY_CLASSES_ROOT\CLSID\!GUID1!] >>CPANC.REG
 ECHO REG ADD /V InfoTip /T REG_SZ /D !CPLDESC! >>CPANC.REG
 ECHO REG ADD DefaultIcon /VE /T REG_SZ /D !DEFICON! >>CPANC.REG
 
-CMD /K
+GOTO WIPE
+
 
 :DSBCTA
 ECHO =======================================
@@ -108,7 +112,8 @@ ECHO "AllowCortana"=dword:00000000 >>CORTANA.REG
 START CORTANA.REG
 ECHO =======================================
 ECHO Jobs Done.
-GOTO HOME
+
+GOTO WIPE
 
 
 
@@ -123,4 +128,12 @@ ECHO "00"=REG_SZ:!FONTNAME! >>CMDFC.REG
 START CMDFC.REG
 ECHO =======================================
 ECHO COMPLETE!
+GOTO WIPE
+
+
+:WIPE
+DEL CPANC.REG
+DEL CMDFC.REG
+DEL CORTANA.REG
+DEL HILIGHTEDITOR.REG
 GOTO HOME
