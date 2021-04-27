@@ -1,5 +1,10 @@
 ﻿# YOOHOO! IF YOU WANNA EDIT THIS CLONE IT FROM GITHUB!
 
+
+
+
+
+
 write-output "Win10Reg"
 
 
@@ -61,6 +66,7 @@ function HLE
     pause
     Set-Itemproperty -Path 'HKCU:\Control Panel\Colors' -Name 'Hilight' -Value "$HLER $HLEG $HLEB"
     Write-Host "Completed!"
+    clear
     HOME
 }
 
@@ -71,7 +77,12 @@ function Cortana
     If ($op2 -eq "Y")
         {
         Set-ItemProperty -Path 'HKCM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search' -Name 'AllowCortana' -Value "00000000"
+        Write-Output "Jobs Done!"
+        pause
+        clear
+        home
     } else {
+        clear
         HOME
     }
 }
@@ -103,6 +114,7 @@ function CtrlPnl
     New-ItemProperty -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel\NameSpace\{$Guid}" -Name "(Default)" -Value "$CPLName" -PropertyType "String"
     
     pause
+    clear
     HOME
 }
 
@@ -121,6 +133,7 @@ ECHO "======================================="
 ECHO "Custom CMD Font - Takes a .TTF You Define and loads it into the command prompt."
 ECHO "======================================="
 pause
+clear
 home
 }
 
@@ -135,6 +148,8 @@ function CCMD
 function bruh
 {
     write-output "Not done yet..."
+    pause
+    clear
     home
 }
 
