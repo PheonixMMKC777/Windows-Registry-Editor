@@ -10,7 +10,7 @@ Most commands wont work if it isnt running on elevated privledges (Admin)
 
 If for some reason it doesnt start upon clicking...
 1. Run powershell as Administrator
-2. Type this command	cd C:\Users\%userprofile%\Downloads\WinRegistry-Editor-main\WinRegistry-Editor-main\
+2. Type this command	cd C:\Users\YOURPROFILENAME\Downloads\WinRegistry-Editor-main\WinRegistry-Editor-main\
 3. Type this command	Start Win10RegistryEditor.ps1
 If you moved the program out of the downloads folder, the path will be different
 
