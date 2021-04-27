@@ -5,7 +5,8 @@
 This is a program to edit the Windows Registry for Windows 10
 In theory it would work with Windows 7/8 but dont expect 100% compatibility.
 
-Run the RUNME! for an easier startup
+Run RUNME.BAT with admin privledges!!!!!!!!
+
 but if that doesnt work
 
 1. Run powershell as Administrator
