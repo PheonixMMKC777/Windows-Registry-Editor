@@ -5,10 +5,9 @@
 This is a program to edit the Windows Registry for Windows 10
 In theory it would work with Windows 7/8 but dont expect 100% compatibility.
 
+Run the RUNME! for an easier startup
+but if that doesnt work
 
-Most commands wont work if it isnt running on elevated privledges (Admin)
-
-If for some reason it doesnt start upon clicking...
 1. Run powershell as Administrator
 2. Type this command	cd C:\Users\YOURPROFILENAME\Downloads\WinRegistry-Editor-main\WinRegistry-Editor-main\
 3. Type this command	Start Win10RegistryEditor.ps1
