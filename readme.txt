@@ -7,12 +7,15 @@ In theory it would work with Windows 7/8 but dont expect 100% compatibility.
 
 Run RUNME.BAT with admin privledges!!!!!!!!
 
-but if that doesnt work
+If you get an error saying 
+Scripts are disabled on this machine...
 
-1. Run powershell as Administrator
-2. Type this command	cd C:\Users\YOURPROFILENAME\Downloads\WinRegistry-Editor-main\WinRegistry-Editor-main\
-3. Type this command	Start Win10RegistryEditor.ps1
-If you moved the program out of the downloads folder, the path will be different
+1. Click the windows button and type powershell.
+2. In the little menu on tthe right, click run as administrator.
+3. type this commmand:	set-executionpolicy remotesigned
+4. At the prompt press Y to enable the script.
+5. Now the script will run!! 
+
 
 
 =======================================
