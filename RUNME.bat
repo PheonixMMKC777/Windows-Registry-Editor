@@ -27,7 +27,7 @@ if '%errorlevel%' NEQ '0' (
 :gotAdmin
     pushd "%CD%"
     CD /D "%~dp0"
-    start Win10RegistryEditor.ps1
+    start powershell -noexit -file "Win10RegistryEditor.ps1"
 
 REM THANKS YOSH!
 REM even though you copied it too X)

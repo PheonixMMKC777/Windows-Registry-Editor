@@ -1,6 +1,7 @@
 ﻿# YOOHOO! IF YOU WANNA EDIT THIS CLONE IT FROM GITHUB!
 
 
+
 write-output "Win10Reg"
 
 
