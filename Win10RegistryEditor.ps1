@@ -27,6 +27,7 @@ function  HOME
     Write-Host " 2 = Custom Control Panel Function"
     Write-Host " 3 = Disable Cortana"
     Write-Host " 4 = Custom CMD Font"
+    Write-Host " 5 = Disable Windows Update Force Reboot"
     Write-Host " H = Help Menu"
     Write-output "=========================="
     $op1 = Read-Host "Pick an option:  "
@@ -43,10 +44,18 @@ function  HOME
     elseif ($op1 -eq "4"){
         bruh
         }
+    elseif ($op1 -eq "5"){
+        WUFR
+        }
     elseif ($op1 -eq "H"){
         HELP
         }
-
+        else {
+        Write-Output "Thats not a valid option :/"
+        pause
+        clear
+        home
+        }
 
 }
 
@@ -63,6 +72,7 @@ function HLE
     pause
     Set-Itemproperty -Path 'HKCU:\Control Panel\Colors' -Name 'Hilight' -Value "$HLER $HLEG $HLEB"
     Write-Host "Completed!"
+    pause
     clear
     HOME
 }
@@ -109,7 +119,8 @@ function CtrlPnl
     New-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\CLSID\{$Guid}\shell\Open\Command" -Name "(Default)" -Value "$CPLCom" -PropertyType "String"
     New-Item -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel\NameSpace\" -Name "{$Guid}"
     New-ItemProperty -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel\NameSpace\{$Guid}" -Name "(Default)" -Value "$CPLName" -PropertyType "String"
-    
+   
+    Write-Output "Keys succesfully created!"
     pause
     clear
     HOME
@@ -117,28 +128,30 @@ function CtrlPnl
 
 
 
-
-function HELP
+function WUFR
 {
-ECHO "======================================="
-ECHO "Hilight Editor - A tool that edits the way text is hilighted, Like on your desktop icons and text."
-ECHO "======================================="
-ECHO "Custom control panel function - Adds a custom control panel function that does what you define."
-ECHO "======================================="
-ECHO "Disable Cortana - Truly Disables Cortana :)"
-ECHO "======================================="
-ECHO "Custom CMD Font - Takes a .TTF You Define and loads it into the command prompt."
-ECHO "======================================="
-pause
-clear
-home
+    
+    New-Item -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows" -Name "WindowsUpdate"   
+    New-Item -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\" -Name "AU"
+    New-ItemProperty -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoRebootWithLoggedOnUsers" -Value "1" -PropertyType "DWord"
+    
+    Write-Output "Done!"
+    Write-Output "If a key already exists, it wont overwrite, just ignore the error"
+    pause
+    clear
+    home
 }
+
+
+
 
 
 function CCMD
 {
    
 }
+
+
 
 
 
@@ -150,5 +163,33 @@ function bruh
     home
 }
 
+
+
+function HELP
+{
+ECHO "======================================="
+ECHO "CHECK OUT THE README!"
+ECHO "======================================="
+ECHO "Hilight Editor - A tool that edits the way text is hilighted, Like on your desktop icons and text."
+ECHO "======================================="
+ECHO "Custom control panel function - Adds a custom control panel function that does what you define."
+ECHO "======================================="
+ECHO "Disable Cortana - Truly Disables Cortana :)"
+ECHO "======================================="
+ECHO "Custom CMD Font - Takes a .TTF You Define and loads it into the command prompt."
+ECHO "======================================="
+ECHO "Stop WU Force Reboot  - Disables Windows Update from forcibly rebooting"
+ECHO "======================================="
+pause
+clear
+home
+}
+
+
+
+
+
+
+#Execute the function
 
 BKC
