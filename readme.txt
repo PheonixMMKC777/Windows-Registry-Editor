@@ -20,6 +20,23 @@ Scripts are disabled on this machine...
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 	CLI VERSION FUNCTIONS
+	Hilgiht  Editor
+	Custom Control Panel Entries
+	Disable Cortana 
+	Custom CMD Font
+	Disable WU Force reboot while online 
+	
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=		
+	GUI VERSION FUNCTIONS
+	Hilgiht  Editor
+	Custom Control Panel Entries	
+	
+	
+	
+=======================================
+
+	FUNCTION SUM UP
+	
 =======================================
 Hilight Editor - A tool that edits the way text is hilighted, Like on your desktop icons and text.
 
@@ -65,10 +82,7 @@ It will still make the new keys though, so it works, completely harmless :)
 
 =======================================
 
-/+-=-+-=-+-=-+-=-+-=-+-=-+-=-+-=-+-=-+-=-/
-	GUI VERSION
-/+-=-+-=-+-=-+-=-+-=-+-=-+-=-+-=-+-=-+-=-/
-Just disable cortana works currently
+
 
 ___________.__                   __     _____.___.              ._._._.
 \__    ___/|  |__ _____    ____ |  | __ \__  |   | ____  __ __  | | | |
