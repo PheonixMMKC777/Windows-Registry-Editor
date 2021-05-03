@@ -77,6 +77,13 @@ function BuildGUI
     $BSODB.Text = "BSOD Keystroke"
     $BSODB.Add_Click({BSOD})
 
+    #ALERTB Button for Main
+    $ALERTB = New-Object System.Windows.Forms.Button
+    $ALERTB.Location = New-Object System.Drawing.Size(5,200)
+    $ALERTB.Size = New-Object System.Drawing.Size(120,46)
+    $ALERTB.Text = "Set Message on Boot Screen"
+    $ALERTB.Add_Click({$ALERT.ShowDialog()})
+
     #endregion Main Menu Buttons
 
 
@@ -233,7 +240,56 @@ function BuildGUI
     #endregion HLEL Window
     
 
+    #region ALERT window
+
+
+
+
+
+    #ALERT MENU
+    $ALERT = New-Object System.Windows.Forms.Form
+    $ALERT.Text ='Boot Message'
+    $ALERT.Width = 350
+    $ALERT.Height = 200
+    $ALERT.AutoSize = $true
+
+    #ALERT LABELS
+    $ALERTL = New-Object System.Windows.Forms.Label
+    $ALERTL.Location = New-Object System.Drawing.Size(5,20)
+    $ALERTL.Size = New-Object System.Drawing.Size(100,20)
+    $ALERTL.Text = "Message Title:"
+
+    $ALERTM = New-Object System.Windows.Forms.Label
+    $ALERTM.Location = New-Object System.Drawing.Size(5,50)
+    $ALERTM.Size = New-Object System.Drawing.Size(100,20)
+    $ALERTM.Text = "Message Content:"
+
+    #ALERT TEXTBOXES
+    $ALERTBT = New-Object System.Windows.Forms.TextBox
+    $ALERTBT.Location = New-Object System.Drawing.Point(120,20)
+    $ALERTBT.Size = New-Object System.Drawing.Size(200,20)
+
+    $ALERTBC = New-Object System.Windows.Forms.TextBox
+    $ALERTBC.Location = New-Object System.Drawing.Point(120,50)
+    $ALERTBC.Size = New-Object System.Drawing.Size(200,100)
+    $ALERTBC.Multiline = $true
+    $ALERTBC.ScrollBars = "Both"
+
+    #ALERT APPLY BUTTON
+
+    $ALERTA = New-Object System.Windows.Forms.Button
+    $ALERTA.Location = New-Object System.Drawing.Size(5,100)
+    $ALERTA.Size = New-Object System.Drawing.Size(100,43)
+    $ALERTA.Text = "Apply"
+    $ALERTA.Add_Click({ALERT})
+
+
+    #endregion ALERT Window
     
+
+
+    #region button classes
+
     #Add Various Labels/buttons
 
     $HLEL.Controls.Add($HLELL)
@@ -256,6 +312,11 @@ function BuildGUI
     $CPANC.Controls.Add($CPANCE)
     $CPANC.Controls.Add($CPANCB)
 
+    $ALERT.Controls.Add($ALERTL)
+    $ALERT.Controls.Add($ALERTM)
+    $ALERT.Controls.Add($ALERTBT)
+    $ALERT.Controls.Add($ALERTBC)
+    $ALERT.Controls.Add($ALERTA)
             
     $main_form.Controls.Add($HLELBUT)
     $main_form.Controls.Add($DWUFR)
@@ -263,6 +324,7 @@ function BuildGUI
     $main_form.Controls.Add($CREDITSB)
     $main_form.Controls.Add($CPANCC)
     $main_form.Controls.Add($BSODB)
+    $main_form.Controls.Add($ALERTB)
         
     $HLEL.AcceptButton = $HLELI
     $HLEL.Add_Shown({$HLELR.Select()})
@@ -270,7 +332,11 @@ function BuildGUI
     $HLEL.Add_Shown({$HLELB.Select()})   
     
     $CREDITS.Controls.Add($CREDITSL)
-    $CREDITS.Controls.Add($CREDITSI)    
+    $CREDITS.Controls.Add($CREDITSI)  
+    
+    #endregion button classes  
+
+
 
     #keep this bottom of the list
     $main_form.ShowDialog()
@@ -312,6 +378,7 @@ function CPANC
     $CPANCDONE.ShowDialog()
 }
 
+
 function HILIGHT 
 {
     $HILIGHTR = $HLELR.Text
@@ -335,6 +402,7 @@ function HILIGHT
     $HLELTC.ShowDialog()
 
 }
+
 
 function DWUFR
 {
@@ -379,7 +447,6 @@ function CortanaGUI
 }
 
 
-
 function BSOD
 {
     Set-ItemProperty -Path "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\kbdhid\Parameters" -Name "CrashOnCtrlScroll" -Value "1"
@@ -398,6 +465,12 @@ function BSOD
     $BSODC.Text = "Task Finished Succesfully! `nHold right control and press Scroll Lock Twice"
     $BSOD.Controls.Add($BSODC)
     $BSOD.ShowDialog()
+}
+
+
+function ALERT
+{
+    Write-output "https://www.howtogeek.com/howto/15771/display-a-text-message-during-bootup-of-windows-7/"
 }
 
 #Execute the function
