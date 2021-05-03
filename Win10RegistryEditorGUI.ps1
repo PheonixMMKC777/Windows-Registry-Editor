@@ -68,24 +68,24 @@ function BuildGUI
     $HLELR = New-Object System.Windows.Forms.TextBox
     $HLELR.Location = New-Object System.Drawing.Point(65,50)
     $HLELR.Size = New-Object System.Drawing.Size(40,20)
-    $HILIGHTR = $HLELR.Text
 
     $HLELG = New-Object System.Windows.Forms.TextBox
     $HLELG.Location = New-Object System.Drawing.Point(65,75)
     $HLELG.Size = New-Object System.Drawing.Size(40,20)
-    $HILIGHTG = $HLELG.Text
 
 
     $HLELB = New-Object System.Windows.Forms.TextBox
     $HLELB.Location = New-Object System.Drawing.Point(65,100)
     $HLELB.Size = New-Object System.Drawing.Size(40,20)
-    $HILIGHTB = $HLELB.Text
 
     #HLELIMPORT
+    
+    # Adding an OK button to the text box window
     $HLELI = New-Object System.Windows.Forms.Button
-    $HLELI.Location = New-Object System.Drawing.Size(25,125)
-    $HLELI.Size = New-Object System.Drawing.Size(120,23)
-    $HLELI.Text = "Import"
+    $HLELI.Location = New-Object System.Drawing.Point(50,125) ### Location of where the button will be
+    $HLELI.Size = New-Object System.Drawing.Size(75,23) ### Size of the button
+    $HLELI.Text = 'Import' ### Text inside the button
+    $HLELI.DialogResult = [System.Windows.Forms.DialogResult]::OK
     $HLELI.Add_Click({HILIGHT})
 
 
@@ -157,7 +157,10 @@ function BuildGUI
     $main_form.Controls.Add($DWUFR)
     $main_form.Controls.Add($DCW)
     $main_form.Controls.Add($CREDITSB)
-    
+    $HLEL.AcceptButton = $HLELI
+    $HLEL.Add_Shown({$HLELR.Select()})
+    $HLEL.Add_Shown({$HLELG.Select()})
+    $HLEL.Add_Shown({$HLELB.Select()})   
     $CREDITS.Controls.Add($CREDITSL)
     $CREDITS.Controls.Add($CREDITSI)    
 
@@ -169,7 +172,26 @@ function BuildGUI
 
 function HILIGHT 
 {
-    Set-Itemproperty -Path 'HKCU:\Control Panel\Colors' -Name 'Hilight' -Value "$HILIGHTR $HILIGHTG $HILIGHTB"  
+    $HILIGHTR = $HLELR.Text
+    $HILIGHTG = $HLELG.Text
+    $HILIGHTB = $HLELB.Text
+
+    Set-Itemproperty -Path 'Registry::HKEY_CURRENT_USER\Control Panel\Colors' -Name 'Hilight' -Value "$HILIGHTR $HILIGHTG $HILIGHTB" 
+    write-output "$HLELR.Text,$HLELG.Text  ,$HLELB.Text, $HILIGHTR $HILIGHTG $HILIGHTB"   
+
+    $HLELTC = New-Object System.Windows.Forms.Form
+    $HLELTC.Text ='Done'
+    $HLELTC.Width = 200
+    $HLELTC.Height = 200
+    $HLELTC.AutoSize = $true
+
+    $HLELTCL = New-Object System.Windows.Forms.Label
+    $HLELTCL.Location = New-Object System.Drawing.Size(0,0)
+    $HLELTCL.Size = New-Object System.Drawing.Size(180,180)
+    $HLELTCL.Text = "Task Finished Succesfully!"
+    $HLELTC.Controls.Add($HLELTCL)
+    $HLELTC.ShowDialog()
+
 }
 
 
@@ -189,7 +211,7 @@ function CortanaGUI
 
     #say retards dead
     $DCWFC = New-Object System.Windows.Forms.Label
-    $DCWFC.Location = New-Object System.Drawing.Size(,0)
+    $DCWFC.Location = New-Object System.Drawing.Size(0,0)
     $DCWFC.Size = New-Object System.Drawing.Size(180,180)
     $DCWFC.Text = "Task Finished Succesfully!"
     $DCWF.Controls.Add($DCWFC)
