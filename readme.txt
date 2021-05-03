@@ -16,8 +16,10 @@ Scripts are disabled on this machine...
 4. At the prompt press Y to enable the script.
 5. Now the script will run!! 
 
+
+
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-	PROGRAM FUNCTIONS
+	CLI VERSION FUNCTIONS
 =======================================
 Hilight Editor - A tool that edits the way text is hilighted, Like on your desktop icons and text.
 
@@ -63,6 +65,10 @@ It will still make the new keys though, so it works, completely harmless :)
 
 =======================================
 
+/+-=-+-=-+-=-+-=-+-=-+-=-+-=-+-=-+-=-+-=-/
+	GUI VERSION
+/+-=-+-=-+-=-+-=-+-=-+-=-+-=-+-=-+-=-+-=-/
+Just disable cortana works currently
 
 ___________.__                   __     _____.___.              ._._._.
 \__    ___/|  |__ _____    ____ |  | __ \__  |   | ____  __ __  | | | |
