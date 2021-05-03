@@ -27,12 +27,156 @@ function BuildGUI
     $main_form.Icon       = [System.Drawing.Icon]::FromHandle((New-Object System.Drawing.Bitmap -Argument $stream).GetHIcon())
     $main_form.Icon       = [System.Drawing.Icon]::FromHandle((New-Object System.Drawing.Bitmap -Argument $stream).GetHIcon())
 
+
+    
+
+    #region Main Menu Buttons
+
+
+
+
+
+
     #HLEL Button for Main
     $HLELBUT = New-Object System.Windows.Forms.Button
-    $HLELBUT.Location = New-Object System.Drawing.Size(0,150)
+    $HLELBUT.Location = New-Object System.Drawing.Size(5,150)
     $HLELBUT.Size = New-Object System.Drawing.Size(120,46)
     $HLELBUT.Text = "Hilight Editor"
     $HLELBUT.Add_Click({$HLEL.ShowDialog()})
+
+
+    #Disable Retard for Main
+    $DCW = New-Object System.Windows.Forms.Button
+    $DCW.Location = New-Object System.Drawing.Size(300,150)
+    $DCW.Size = New-Object System.Drawing.Size(120,23)
+    $DCW.Text = "Disable Cortana"
+    $DCW.Add_Click({CortanaGUI})
+
+  
+
+    #Disable WUFR for Main
+    $DWUFR = New-Object System.Windows.Forms.Button
+    $DWUFR.Location = New-Object System.Drawing.Size(5,250)
+    $DWUFR.Size = New-Object System.Drawing.Size(120,46)
+    $DWUFR.Text = "Disable WU Forced Reboot"
+    $DWUFR.Add_Click({DWUFR})
+
+
+    #CPANC Button for Main
+    $CPANCC = New-Object System.Windows.Forms.Button
+    $CPANCC.Location = New-Object System.Drawing.Size(155,150)
+    $CPANCC.Size = New-Object System.Drawing.Size(120,46)
+    $CPANCC.Text = "Custom Control Panel Entries"
+    $CPANCC.Add_Click({$CPANC.ShowDialog()})
+
+
+    #BSOD Button for Main
+    $BSODB = New-Object System.Windows.Forms.Button
+    $BSODB.Location = New-Object System.Drawing.Size(300,175)
+    $BSODB.Size = New-Object System.Drawing.Size(120,23)
+    $BSODB.Text = "BSOD Keystroke"
+    $BSODB.Add_Click({BSOD})
+
+    #endregion Main Menu Buttons
+
+
+    #region Cpanc windows
+
+
+
+    #CPANC WINDOW
+    $CPANC = New-Object System.Windows.Forms.Form
+    $CPANC.Text ='Create Control Panel Entries'
+    $CPANC.Width = 350
+    $CPANC.Height = 250
+    $CPANC.AutoSize = $true
+
+    #CPANCTextboxes
+
+    $CPANCNAME = New-Object System.Windows.Forms.TextBox
+    $CPANCNAME.Location = New-Object System.Drawing.Point(90,50)
+    $CPANCNAME.Size = New-Object System.Drawing.Size(250,20)
+
+    $CPANCDESC = New-Object System.Windows.Forms.TextBox
+    $CPANCDESC.Location = New-Object System.Drawing.Point(90,80)
+    $CPANCDESC.Size = New-Object System.Drawing.Size(250,20)
+
+    $CPANCICON = New-Object System.Windows.Forms.TextBox
+    $CPANCICON.Location = New-Object System.Drawing.Point(90,110)
+    $CPANCICON.Size = New-Object System.Drawing.Size(250,20)
+
+    $CPANCCOMM = New-Object System.Windows.Forms.TextBox
+    $CPANCCOMM.Location = New-Object System.Drawing.Point(90,140)
+    $CPANCCOMM.Size = New-Object System.Drawing.Size(250,20)
+
+    #CPANC Label
+    $CPANCL = New-Object System.Windows.Forms.Label
+    $CPANCL.Location = New-Object System.Drawing.Size(90,20)
+    $CPANCL.Size = New-Object System.Drawing.Size(250,20)
+    $CPANCL.Text = " Enter Values Below, see readme for details."
+
+    $CPANCN = New-Object System.Windows.Forms.Label
+    $CPANCN.Location = New-Object System.Drawing.Size(0,50)
+    $CPANCN.Size = New-Object System.Drawing.Size(80,20)
+    $CPANCN.Text = "Name:"
+
+    $CPANCD = New-Object System.Windows.Forms.Label
+    $CPANCD.Location = New-Object System.Drawing.Size(0,80)
+    $CPANCD.Size = New-Object System.Drawing.Size(80,20)
+    $CPANCD.Text = "Description:"
+
+    $CPANCI = New-Object System.Windows.Forms.Label
+    $CPANCI.Location = New-Object System.Drawing.Size(0,110)
+    $CPANCI.Size = New-Object System.Drawing.Size(80,20)
+    $CPANCI.Text = "Icon Path:"
+
+    $CPANCE = New-Object System.Windows.Forms.Label
+    $CPANCE.Location = New-Object System.Drawing.Size(0,140)
+    $CPANCE.Size = New-Object System.Drawing.Size(80,20)
+    $CPANCE.Text = "Command:"
+
+    #CPANC Button execute
+    $CPANCB = New-Object System.Windows.Forms.Button
+    $CPANCB.Location = New-Object System.Drawing.Size(120,170)
+    $CPANCB.Size = New-Object System.Drawing.Size(120,40)
+    $CPANCB.Text = "Create!"
+    $CPANCB.Add_Click({CPANC})
+
+    #endregion Cpanc windows    
+
+
+    #region Credits Windows
+
+        #Credits Button For Main
+    $CREDITSB = New-Object System.Windows.Forms.Button
+    $CREDITSB.Location = New-Object System.Drawing.Size(300,350)
+    $CREDITSB.Size = New-Object System.Drawing.Size(120,23)
+    $CREDITSB.Text = "Credits"
+    $CREDITSB.Add_Click({$CREDITS.ShowDialog()})
+
+        #Cresdits Window
+    $CREDITS = New-Object System.Windows.Forms.Form
+    $CREDITS.Text ='Credits'
+    $CREDITS.Width = 120
+    $CREDITS.Height = 60
+    $CREDITS.AutoSize = $true
+
+        #Credits Text
+    $CREDITSL = New-Object System.Windows.Forms.Label
+    $CREDITSL.Location = New-Object System.Drawing.Size(0,0)
+    $CREDITSL.Size = New-Object System.Drawing.Size(220,60)
+    $CREDITSL.Text = "`n   Programmed by PheonixMMKC777"
+
+        #Credits Image
+    #$CREDITSI = New-Object System.Windows.Forms.PictureBox
+    #$CREDITSI.Image = $img
+    #$CREDITSI.SizeMode = "center"
+    #$CREDITSI.Anchor = "bottom, left" 
+
+    #endregion Credits Windows
+
+
+    #region HLEL Window
 
     #HLEL MENU
     $HLEL = New-Object System.Windows.Forms.Form
@@ -78,8 +222,6 @@ function BuildGUI
     $HLELB.Location = New-Object System.Drawing.Point(65,100)
     $HLELB.Size = New-Object System.Drawing.Size(40,20)
 
-    #HLELIMPORT
-    
     # Adding an OK button to the text box window
     $HLELI = New-Object System.Windows.Forms.Button
     $HLELI.Location = New-Object System.Drawing.Point(50,125) ### Location of where the button will be
@@ -88,61 +230,9 @@ function BuildGUI
     $HLELI.DialogResult = [System.Windows.Forms.DialogResult]::OK
     $HLELI.Add_Click({HILIGHT})
 
-
-
-    #Disable Retard thing
-    $DCW = New-Object System.Windows.Forms.Button
-    $DCW.Location = New-Object System.Drawing.Size(300,100)
-    $DCW.Size = New-Object System.Drawing.Size(120,23)
-    $DCW.Text = "Disable Cortana"
-    $DCW.Add_Click({CortanaGUI})
-
-  
-
-    #Disable WUFR for Main
-    $DWUFR = New-Object System.Windows.Forms.Button
-    $DWUFR.Location = New-Object System.Drawing.Size(0,200)
-    $DWUFR.Size = New-Object System.Drawing.Size(120,46)
-    $DWUFR.Text = "Disable WU Forced Reboot"
-    $DWUFR.Add_Click({DWUFR})
-
-
-
-
-
-
-
-
-        #Credits Button For Main
-    $CREDITSB = New-Object System.Windows.Forms.Button
-    $CREDITSB.Location = New-Object System.Drawing.Size(300,350)
-    $CREDITSB.Size = New-Object System.Drawing.Size(120,23)
-    $CREDITSB.Text = "Credits"
-    $CREDITSB.Add_Click({$CREDITS.ShowDialog()})
-
-        #Cresdits Window
-    $CREDITS = New-Object System.Windows.Forms.Form
-    $CREDITS.Text ='Credits'
-    $CREDITS.Width = 120
-    $CREDITS.Height = 60
-    $CREDITS.AutoSize = $true
-
-        #Credits Text
-    $CREDITSL = New-Object System.Windows.Forms.Label
-    $CREDITSL.Location = New-Object System.Drawing.Size(0,0)
-    $CREDITSL.Size = New-Object System.Drawing.Size(220,60)
-    $CREDITSL.Text = "`n   Programmed by PheonixMMKC777"
-
-        #Credits Image
-    #$CREDITSI = New-Object System.Windows.Forms.PictureBox
-    #$CREDITSI.Image = $img
-    #$CREDITSI.SizeMode = "center"
-    #$CREDITSI.Anchor = "bottom, left" 
-
-
-
-
+    #endregion HLEL Window
     
+
     
     #Add Various Labels/buttons
 
@@ -154,14 +244,31 @@ function BuildGUI
     $HLEL.Controls.Add($HLELTR)
     $HLEL.Controls.Add($HLELTG)
     $HLEL.Controls.Add($HLELTB)
+
+    $CPANC.Controls.Add($CPANCNAME)
+    $CPANC.Controls.Add($CPANCDESC)
+    $CPANC.Controls.Add($CPANCICON)
+    $CPANC.Controls.Add($CPANCCOMM)
+    $CPANC.Controls.Add($CPANCL)
+    $CPANC.Controls.Add($CPANCN)
+    $CPANC.Controls.Add($CPANCD)
+    $CPANC.Controls.Add($CPANCI)
+    $CPANC.Controls.Add($CPANCE)
+    $CPANC.Controls.Add($CPANCB)
+
+            
     $main_form.Controls.Add($HLELBUT)
     $main_form.Controls.Add($DWUFR)
     $main_form.Controls.Add($DCW)
     $main_form.Controls.Add($CREDITSB)
+    $main_form.Controls.Add($CPANCC)
+    $main_form.Controls.Add($BSODB)
+        
     $HLEL.AcceptButton = $HLELI
     $HLEL.Add_Shown({$HLELR.Select()})
     $HLEL.Add_Shown({$HLELG.Select()})
     $HLEL.Add_Shown({$HLELB.Select()})   
+    
     $CREDITS.Controls.Add($CREDITSL)
     $CREDITS.Controls.Add($CREDITSI)    
 
@@ -169,7 +276,41 @@ function BuildGUI
     $main_form.ShowDialog()
 }
 
+function CPANC
+{
+    $Guid = New-Guid
 
+    # C:\Users\brenden.a.scarfone\Desktop\coffee.ico
+
+    Set-Location -Path "Registry::HKEY_CLASSES_ROOT"
+
+    New-Item -Path "Registry::HKEY_CLASSES_ROOT\CLSID\" -Name "{$Guid}"
+    New-ItemProperty "Registry::HKEY_CLASSES_ROOT\CLSID\{$Guid}" -Name "(Default)" -Value "$CPANCNAME" -PropertyType "String"
+    New-ItemProperty "Registry::HKEY_CLASSES_ROOT\CLSID\{$Guid}" -Name "InfoTip" -Value "$CPANCDESC" -PropertyType "String"
+
+    New-Item -Path "Registry::HKEY_CLASSES_ROOT\CLSID\{$Guid}" -Name "DefaultIcon"
+    New-ItemProperty "Registry::HKEY_CLASSES_ROOT\CLSID\{$Guid}\DefaultIcon" -Name "(Default)" -Value "$CPANCPATH" -PropertyType "String"
+   
+    New-Item -Path "Registry::HKEY_CLASSES_ROOT\CLSID\{$Guid}" -Name "Shell"
+    New-Item -Path "Registry::HKEY_CLASSES_ROOT\CLSID\{$Guid}\Shell" -Name "Open"
+    New-Item -Path "Registry::HKEY_CLASSES_ROOT\CLSID\{$Guid}\shell\Open" -Name "Command"
+    New-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\CLSID\{$Guid}\shell\Open\Command" -Name "(Default)" -Value "$CPANCCOMM" -PropertyType "String"
+    New-Item -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel\NameSpace\" -Name "{$Guid}"
+    New-ItemProperty -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel\NameSpace\{$Guid}" -Name "(Default)" -Value "$CPANCNAME" -PropertyType "String"
+
+    $CPANCDONE = New-Object System.Windows.Forms.Form
+    $CPANCDONE.Text ='CPANC'
+    $CPANCDONE.Width = 200
+    $CPANCDONE.Height = 200
+    $CPANCDONE.AutoSize = $true
+
+    $CPANCDONEL = New-Object System.Windows.Forms.Label
+    $CPANCDONEL.Location = New-Object System.Drawing.Size(0,0)
+    $CPANCDONEL.Size = New-Object System.Drawing.Size(180,180)
+    $CPANCDONEL.Text = "Task Finished Succesfully!"
+    $CPANCDONE.Controls.Add($CPANCDONEL)
+    $CPANCDONE.ShowDialog()
+}
 
 function HILIGHT 
 {
@@ -237,6 +378,27 @@ function CortanaGUI
     $DCWF.ShowDialog()
 }
 
+
+
+function BSOD
+{
+    Set-ItemProperty -Path "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\kbdhid\Parameters" -Name "CrashOnCtrlScroll" -Value "1"
+
+    #BSOD windows
+    $BSOD = New-Object System.Windows.Forms.Form
+    $BSOD.Text ='BSOD'
+    $BSOD.Width = 300
+    $BSOD.Height = 100
+    $BSOD.AutoSize = $true
+
+    #BSOD WINDOW YIPPEE
+    $BSODC = New-Object System.Windows.Forms.Label
+    $BSODC.Location = New-Object System.Drawing.Size(0,0)
+    $BSODC.Size = New-Object System.Drawing.Size(300,50)
+    $BSODC.Text = "Task Finished Succesfully! `nHold right control and press Scroll Lock Twice"
+    $BSOD.Controls.Add($BSODC)
+    $BSOD.ShowDialog()
+}
 
 #Execute the function
 
