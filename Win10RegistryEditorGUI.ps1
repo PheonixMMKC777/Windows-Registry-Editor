@@ -25,7 +25,7 @@ function BuildGUI
     $stream          = New-Object IO.MemoryStream($iconBytes, 0, $iconBytes.Length)
     $stream.Write($iconBytes, 0, $iconBytes.Length)
     $main_form.Icon       = [System.Drawing.Icon]::FromHandle((New-Object System.Drawing.Bitmap -Argument $stream).GetHIcon())
-
+    $main_form.Icon       = [System.Drawing.Icon]::FromHandle((New-Object System.Drawing.Bitmap -Argument $stream).GetHIcon())
 
     #HLEL Button for Main
     $HLELBUT = New-Object System.Windows.Forms.Button
@@ -104,6 +104,7 @@ function BuildGUI
     $DWUFR.Location = New-Object System.Drawing.Size(0,200)
     $DWUFR.Size = New-Object System.Drawing.Size(120,46)
     $DWUFR.Text = "Disable WU Forced Reboot"
+    $DWUFR.Add_Click({DWUFR})
 
 
 
@@ -180,7 +181,7 @@ function HILIGHT
     write-output "$HLELR.Text,$HLELG.Text  ,$HLELB.Text, $HILIGHTR $HILIGHTG $HILIGHTB"   
 
     $HLELTC = New-Object System.Windows.Forms.Form
-    $HLELTC.Text ='Done'
+    $HLELTC.Text ='HLEL'
     $HLELTC.Width = 200
     $HLELTC.Height = 200
     $HLELTC.AutoSize = $true
@@ -194,7 +195,25 @@ function HILIGHT
 
 }
 
+function DWUFR
+{
+    New-Item -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows" -Name "WindowsUpdate"   
+    New-Item -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\" -Name "AU"
+    New-ItemProperty -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoRebootWithLoggedOnUsers" -Value "1" -PropertyType "DWord"
+    
+    $DWUFRTC = New-Object System.Windows.Forms.Form
+    $DWUFRTC.Text ='DWUFR'
+    $DWUFRTC.Width = 200
+    $DWUFRTC.Height = 200
+    $DWUFRTC.AutoSize = $true
 
+    $DWUFRTCL = New-Object System.Windows.Forms.Label
+    $DWUFRTCL.Location = New-Object System.Drawing.Size(0,0)
+    $DWUFRTCL.Size = New-Object System.Drawing.Size(180,180)
+    $DWUFRTCL.Text = "Task Finished Succesfully!"
+    $DWUFRTC.Controls.Add($DWUFRTCL)
+    $DWUFRTC.ShowDialog()
+}
 
 
 function CortanaGUI
@@ -204,7 +223,7 @@ function CortanaGUI
     
     #Retards dead windows.
     $DCWF = New-Object System.Windows.Forms.Form
-    $DCWF.Text ='Done'
+    $DCWF.Text ='DCW'
     $DCWF.Width = 200
     $DCWF.Height = 200
     $DCWF.AutoSize = $true
