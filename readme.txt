@@ -29,7 +29,7 @@ Scripts are disabled on this machine...
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=		
 	GUI VERSION FUNCTIONS
 	Hilgiht  Editor
-	Custom Control Panel Entries	
+	Disable Cortana	
 	Diable Forced WU Reboot
 	
 	
