@@ -23,14 +23,15 @@ Scripts are disabled on this machine...
 	Hilgiht  Editor
 	Custom Control Panel Entries
 	Disable Cortana 
-	Custom CMD Font
 	Disable WU Force reboot while online 
 	
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=		
 	GUI VERSION FUNCTIONS
 	Hilgiht  Editor
+	Custom Control Panel Entries
 	Disable Cortana	
 	Diable Forced WU Reboot
+	BSOD keystroke
 	
 	
 	
