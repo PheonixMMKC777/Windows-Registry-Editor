@@ -345,24 +345,31 @@ function BuildGUI
 function CPANC
 {
     $Guid = New-Guid
+    $CPLNAME = $CPANCNAME.Text
+    $CPLICON = $CPANCICON.Text
+    $CPLDESC = $CPANCDESC.Text
+    $CPLCOMM = $CPANCCOMM.Text
+
 
     # C:\Users\brenden.a.scarfone\Desktop\coffee.ico
 
     Set-Location -Path "Registry::HKEY_CLASSES_ROOT"
 
     New-Item -Path "Registry::HKEY_CLASSES_ROOT\CLSID\" -Name "{$Guid}"
-    New-ItemProperty "Registry::HKEY_CLASSES_ROOT\CLSID\{$Guid}" -Name "(Default)" -Value "$CPANCNAME" -PropertyType "String"
-    New-ItemProperty "Registry::HKEY_CLASSES_ROOT\CLSID\{$Guid}" -Name "InfoTip" -Value "$CPANCDESC" -PropertyType "String"
+    New-ItemProperty "Registry::HKEY_CLASSES_ROOT\CLSID\{$Guid}" -Name "(Default)" -Value "$CPLNAME" -PropertyType "String"
+    New-ItemProperty "Registry::HKEY_CLASSES_ROOT\CLSID\{$Guid}" -Name "InfoTip" -Value "$CPLDESC" -PropertyType "String"
 
     New-Item -Path "Registry::HKEY_CLASSES_ROOT\CLSID\{$Guid}" -Name "DefaultIcon"
-    New-ItemProperty "Registry::HKEY_CLASSES_ROOT\CLSID\{$Guid}\DefaultIcon" -Name "(Default)" -Value "$CPANCPATH" -PropertyType "String"
+    New-ItemProperty "Registry::HKEY_CLASSES_ROOT\CLSID\{$Guid}\DefaultIcon" -Name "(Default)" -Value "$CPLICON" -PropertyType "String"
    
     New-Item -Path "Registry::HKEY_CLASSES_ROOT\CLSID\{$Guid}" -Name "Shell"
     New-Item -Path "Registry::HKEY_CLASSES_ROOT\CLSID\{$Guid}\Shell" -Name "Open"
     New-Item -Path "Registry::HKEY_CLASSES_ROOT\CLSID\{$Guid}\shell\Open" -Name "Command"
-    New-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\CLSID\{$Guid}\shell\Open\Command" -Name "(Default)" -Value "$CPANCCOMM" -PropertyType "String"
+    New-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\CLSID\{$Guid}\shell\Open\Command" -Name "(Default)" -Value "$CPLCOMM" -PropertyType "String"
     New-Item -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel\NameSpace\" -Name "{$Guid}"
-    New-ItemProperty -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel\NameSpace\{$Guid}" -Name "(Default)" -Value "$CPANCNAME" -PropertyType "String"
+    New-ItemProperty -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel\NameSpace\{$Guid}" -Name "(Default)" -Value "$CPLNAME" -PropertyType "String"
+
+    write-output "$_"
 
     $CPANCDONE = New-Object System.Windows.Forms.Form
     $CPANCDONE.Text ='CPANC'
