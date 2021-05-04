@@ -84,6 +84,10 @@ It will throw an error if a path exists, and it wont overwrite any existing keys
 It will still make the new keys though, so it works, completely harmless :)
 
 =======================================
+BSOD Keystroke
+
+Run it, and the key combo is this.
+hold right ctrl and press scroll lock twice.
 
 
 
