@@ -30,8 +30,9 @@ Scripts are disabled on this machine...
 	Hilgiht  Editor
 	Custom Control Panel Entries
 	Disable Cortana	
-	Diable Forced WU Reboot
+	Disable WU Force reboot while online 
 	BSOD keystroke
+	Custom Startup Menu Text
 	
 	
 	
