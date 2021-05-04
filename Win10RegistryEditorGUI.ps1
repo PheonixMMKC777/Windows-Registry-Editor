@@ -481,7 +481,15 @@ function BSOD
 
 function ALERT
 {
-    Write-output "https://www.howtogeek.com/howto/15771/display-a-text-message-during-bootup-of-windows-7/"
+
+    # "https://www.howtogeek.com/howto/15771/display-a-text-message-during-bootup-of-windows-7/"
+    
+    $LNC = $ALERTBT.Text
+    $LNT = $ALERTBC.Text
+
+    Set-ItemProperty -path "REGISTRY::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\" -Name "legalnoticecaption" -Value "$LNC"
+    Set-ItemProperty -path "REGISTRY::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\" -Name "legalnoticetext" -Value "$LNT"
+
 }
 
 #Execute the function
