@@ -84,6 +84,15 @@ function BuildGUI
     $ALERTB.Text = "Set Message on Boot Screen"
     $ALERTB.Add_Click({$ALERT.ShowDialog()})
 
+
+    #DBINGB Button for Main
+    $DBINGB = New-Object System.Windows.Forms.Button
+    $DBINGB.Location = New-Object System.Drawing.Size(155,200)
+    $DBINGB.Size = New-Object System.Drawing.Size(120,46)
+    $DBINGB.Text = "Disable Bing in Windows search"
+    $DBINGB.Add_Click({Disbing})
+
+
     #endregion Main Menu Buttons
 
 
@@ -325,7 +334,8 @@ function BuildGUI
     $main_form.Controls.Add($CPANCC)
     $main_form.Controls.Add($BSODB)
     $main_form.Controls.Add($ALERTB)
-        
+    $main_form.Controls.Add($DBINGB)        
+
     $HLEL.AcceptButton = $HLELI
     $HLEL.Add_Shown({$HLELR.Select()})
     $HLEL.Add_Shown({$HLELG.Select()})
@@ -483,8 +493,6 @@ function BSOD
 
 function ALERT
 {
-
-    # "https://www.howtogeek.com/howto/15771/display-a-text-message-during-bootup-of-windows-7/"
     
     $LNC = $ALERTBT.Text
     $LNT = $ALERTBC.Text
@@ -492,7 +500,49 @@ function ALERT
     Set-ItemProperty -path "REGISTRY::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\" -Name "legalnoticecaption" -Value "$LNC"
     Set-ItemProperty -path "REGISTRY::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\" -Name "legalnoticetext" -Value "$LNT"
 
+        #Retards dead windows.
+    $DCWF = New-Object System.Windows.Forms.Form
+    $DCWF.Text ='DCW'
+    $DCWF.Width = 200
+    $DCWF.Height = 200
+    $DCWF.AutoSize = $true
+
+    #say retards dead
+    $DCWFC = New-Object System.Windows.Forms.Label
+    $DCWFC.Location = New-Object System.Drawing.Size(0,0)
+    $DCWFC.Size = New-Object System.Drawing.Size(180,180)
+    $DCWFC.Text = "Task Finished Succesfully!"
+    $DCWF.Controls.Add($DCWFC)
+    $DCWF.ShowDialog()
+
 }
+
+
+
+function Disbing
+{
+    
+    New-Item -path -path "REGISTRY::HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\" -Name "Explorer"
+    New-ItemProperty -path "REGISTRY::HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer\" -Name "DisableSearchBoxSuggestions" -Value "1"
+    Set-ItemProperty -path "REGISTRY::HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer\" -Name "DisableSearchBoxSuggestions" -Value "1"
+
+        #Retards dead windows.
+    $DCWF = New-Object System.Windows.Forms.Form
+    $DCWF.Text ='DCW'
+    $DCWF.Width = 200
+    $DCWF.Height = 200
+    $DCWF.AutoSize = $true
+
+    #say retards dead
+    $DCWFC = New-Object System.Windows.Forms.Label
+    $DCWFC.Location = New-Object System.Drawing.Size(0,0)
+    $DCWFC.Size = New-Object System.Drawing.Size(180,180)
+    $DCWFC.Text = "Task Finished Succesfully!"
+    $DCWF.Controls.Add($DCWFC)
+    $DCWF.ShowDialog()
+
+}
+
 
 #Execute the function
 
