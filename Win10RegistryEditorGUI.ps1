@@ -28,7 +28,7 @@ function BuildGUI
     $main_form.Icon       = [System.Drawing.Icon]::FromHandle((New-Object System.Drawing.Bitmap -Argument $stream).GetHIcon())
 
 
-    
+   
 
     #region Main Menu Buttons
 
@@ -52,7 +52,7 @@ function BuildGUI
     $DCW.Text = "Disable Cortana"
     $DCW.Add_Click({CortanaGUI})
 
-  
+ 
 
     #Disable WUFR for Main
     $DWUFR = New-Object System.Windows.Forms.Button
@@ -187,7 +187,7 @@ function BuildGUI
     #$CREDITSI = New-Object System.Windows.Forms.PictureBox
     #$CREDITSI.Image = $img
     #$CREDITSI.SizeMode = "center"
-    #$CREDITSI.Anchor = "bottom, left" 
+    #$CREDITSI.Anchor = "bottom, left"
 
     #endregion Credits Windows
 
@@ -200,7 +200,7 @@ function BuildGUI
     $HLEL.Width = 200
     $HLEL.Height = 200
     $HLEL.AutoSize = $true
-    
+   
 
     #HLE Label
     $HLELL = New-Object System.Windows.Forms.Label
@@ -247,7 +247,7 @@ function BuildGUI
     $HLELI.Add_Click({HILIGHT})
 
     #endregion HLEL Window
-    
+   
 
     #region ALERT window
 
@@ -294,7 +294,7 @@ function BuildGUI
 
 
     #endregion ALERT Window
-    
+   
 
 
     #region button classes
@@ -326,7 +326,7 @@ function BuildGUI
     $ALERT.Controls.Add($ALERTBT)
     $ALERT.Controls.Add($ALERTBC)
     $ALERT.Controls.Add($ALERTA)
-            
+           
     $main_form.Controls.Add($HLELBUT)
     $main_form.Controls.Add($DWUFR)
     $main_form.Controls.Add($DCW)
@@ -339,11 +339,11 @@ function BuildGUI
     $HLEL.AcceptButton = $HLELI
     $HLEL.Add_Shown({$HLELR.Select()})
     $HLEL.Add_Shown({$HLELG.Select()})
-    $HLEL.Add_Shown({$HLELB.Select()})   
-    
+    $HLEL.Add_Shown({$HLELB.Select()})  
+   
     $CREDITS.Controls.Add($CREDITSL)
     $CREDITS.Controls.Add($CREDITSI)  
-    
+   
     #endregion button classes  
 
 
@@ -362,7 +362,7 @@ function CPANC
 
 
     # C:\Users\brenden.a.scarfone\Desktop\coffee.ico
-
+    try{
     Set-Location -Path "Registry::HKEY_CLASSES_ROOT"
 
     New-Item -Path "Registry::HKEY_CLASSES_ROOT\CLSID\" -Name "{$Guid}"
@@ -378,8 +378,11 @@ function CPANC
     New-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\CLSID\{$Guid}\shell\Open\Command" -Name "(Default)" -Value "$CPLCOMM" -PropertyType "String"
     New-Item -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel\NameSpace\" -Name "{$Guid}"
     New-ItemProperty -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel\NameSpace\{$Guid}" -Name "(Default)" -Value "$CPLNAME" -PropertyType "String"
+    }
+    catch{$_
+    throw "SCREWED UP"
+    }
 
-    write-output "$_"
 
     $CPANCDONE = New-Object System.Windows.Forms.Form
     $CPANCDONE.Text ='CPANC'
@@ -396,15 +399,24 @@ function CPANC
 }
 
 
-function HILIGHT 
+function HILIGHT
 {
     $HILIGHTR = $HLELR.Text
     $HILIGHTG = $HLELG.Text
     $HILIGHTB = $HLELB.Text
 
-    Set-Itemproperty -Path 'Registry::HKEY_CURRENT_USER\Control Panel\Colors' -Name 'Hilight' -Value "$HILIGHTR $HILIGHTG $HILIGHTB" 
-    write-output "$HLELR.Text,$HLELG.Text  ,$HLELB.Text, $HILIGHTR $HILIGHTG $HILIGHTB"   
+    try {
+    Set-Itemproperty -Path 'Registry::HKEY_CURRENT_USER\Control Panel\Colors' -Name 'Hilight' -Value "$HILIGHTR $HILIGHTG $HILIGHTB"
+    write-output "$HLELR.Text,$HLELG.Text  ,$HLELB.Text, $HILIGHTR $HILIGHTG $HILIGHTB"  
+    }
 
+    catch{$_   
+    throw "SCREWED UP"
+    }
+
+
+
+   
     $HLELTC = New-Object System.Windows.Forms.Form
     $HLELTC.Text ='HLEL'
     $HLELTC.Width = 200
@@ -417,17 +429,21 @@ function HILIGHT
     $HLELTCL.Text = "Task Finished Succesfully!"
     $HLELTC.Controls.Add($HLELTCL)
     $HLELTC.ShowDialog()
-
+   
 }
 
 
 function DWUFR
 {
-    New-Item -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows" -Name "WindowsUpdate"   
+    try{
+    New-Item -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows" -Name "WindowsUpdate"  
     New-Item -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\" -Name "AU"
     New-ItemProperty -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoRebootWithLoggedOnUsers" -Value "1" -PropertyType "DWord"
     Set-ItemProperty -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoRebootWithLoggedOnUsers" -Value "1" -PropertyType "DWord"
-    
+    }
+    catch{$_
+    throw "SCREWED UP"
+    }
     $DWUFRTC = New-Object System.Windows.Forms.Form
     $DWUFRTC.Text ='DWUFR'
     $DWUFRTC.Width = 200
@@ -445,10 +461,20 @@ function DWUFR
 
 function CortanaGUI
 {
+    try{
+
     New-Item -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\' -Name 'Windows Search'
     New-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search' -Name 'AllowCortana' -Value "00000000" -PropertyType "String"
     Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search' -Name 'AllowCortana' -Value "00000000" -PropertyType "String"
-    
+    }
+
+    catch{$_
+    throw "SCREWED UP"   
+    }
+
+   
+    finally{}
+
     #Retards dead windows.
     $DCWF = New-Object System.Windows.Forms.Form
     $DCWF.Text ='DCW'
@@ -460,20 +486,26 @@ function CortanaGUI
     $DCWFC = New-Object System.Windows.Forms.Label
     $DCWFC.Location = New-Object System.Drawing.Size(0,0)
     $DCWFC.Size = New-Object System.Drawing.Size(180,180)
-    $DCWFC.Text = "Task Finished Succesfully!"
+    $DCWFC.Text = "Task Completed Succesfully"
     $DCWF.Controls.Add($DCWFC)
     $DCWF.ShowDialog()
+   
+
 }
 
 
 function BSOD
 {
-
+    try{
     New-Item -Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\" -Name "services"
     New-Item -Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\" -Name "kbdhid"    
     New-Item -Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\kbdhid\" -Name "Parameters"
     New-ItemProperty -Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\kbdhid\Parameters" -Name "CrashOnCtrlScroll" -Value "1"
     Set-ItemProperty -Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\kbdhid\Parameters" -Name "CrashOnCtrlScroll" -Value "1"
+    }
+    catch{$_
+    throw "SCREWED UP"
+    }
     #BSOD windows
     $BSOD = New-Object System.Windows.Forms.Form
     $BSOD.Text ='BSOD'
@@ -493,13 +525,16 @@ function BSOD
 
 function ALERT
 {
-    
+   
     $LNC = $ALERTBT.Text
     $LNT = $ALERTBC.Text
-
+    try {
     Set-ItemProperty -path "REGISTRY::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\" -Name "legalnoticecaption" -Value "$LNC"
     Set-ItemProperty -path "REGISTRY::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\" -Name "legalnoticetext" -Value "$LNT"
-
+    }
+    catch{$_
+    throw "SCRWED UP"
+    }
         #Retards dead windows.
     $DCWF = New-Object System.Windows.Forms.Form
     $DCWF.Text ='DCW'
@@ -521,11 +556,16 @@ function ALERT
 
 function Disbing
 {
-    
+   try{
     New-Item -path -path "REGISTRY::HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\" -Name "Explorer"
     New-ItemProperty -path "REGISTRY::HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer\" -Name "DisableSearchBoxSuggestions" -Value "1"
     Set-ItemProperty -path "REGISTRY::HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer\" -Name "DisableSearchBoxSuggestions" -Value "1"
+    }
 
+    catch{$_
+    throw "SCREWED UP"
+    
+    }
         #Retards dead windows.
     $DCWF = New-Object System.Windows.Forms.Form
     $DCWF.Text ='DCW'
