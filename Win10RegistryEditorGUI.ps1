@@ -5,7 +5,7 @@
 #$mmkc = Get-Item "assets/mmkc.png"
 #$img = [System.Drawing.Image]::Fromfile($mmkc)
 
-
+#$Window.Backcolor = "Blue"
 
 [System.Windows.Forms.Application]::EnableVisualStyles()
 
