@@ -25,7 +25,6 @@ function BuildGUI
     $stream          = New-Object IO.MemoryStream($iconBytes, 0, $iconBytes.Length)
     $stream.Write($iconBytes, 0, $iconBytes.Length)
     $main_form.Icon       = [System.Drawing.Icon]::FromHandle((New-Object System.Drawing.Bitmap -Argument $stream).GetHIcon())
-    $main_form.Icon       = [System.Drawing.Icon]::FromHandle((New-Object System.Drawing.Bitmap -Argument $stream).GetHIcon())
 
 
    
@@ -106,6 +105,7 @@ function BuildGUI
     $CPANC.Width = 350
     $CPANC.Height = 250
     $CPANC.AutoSize = $true
+    $CPANC.Icon       = [System.Drawing.Icon]::FromHandle((New-Object System.Drawing.Bitmap -Argument $stream).GetHIcon())
 
     #CPANCTextboxes
 
@@ -168,6 +168,7 @@ function BuildGUI
     $CREDITSB.Location = New-Object System.Drawing.Size(300,350)
     $CREDITSB.Size = New-Object System.Drawing.Size(120,23)
     $CREDITSB.Text = "Credits"
+
     $CREDITSB.Add_Click({$CREDITS.ShowDialog()})
 
         #Cresdits Window
@@ -175,6 +176,7 @@ function BuildGUI
     $CREDITS.Text ='Credits'
     $CREDITS.Width = 120
     $CREDITS.Height = 60
+    $CREDITS.Icon       = [System.Drawing.Icon]::FromHandle((New-Object System.Drawing.Bitmap -Argument $stream).GetHIcon())
     $CREDITS.AutoSize = $true
 
         #Credits Text
@@ -199,13 +201,14 @@ function BuildGUI
     $HLEL.Text ='Hilight Editor'
     $HLEL.Width = 200
     $HLEL.Height = 200
+    $HLEL.Icon       = [System.Drawing.Icon]::FromHandle((New-Object System.Drawing.Bitmap -Argument $stream).GetHIcon())
     $HLEL.AutoSize = $true
    
 
     #HLE Label
     $HLELL = New-Object System.Windows.Forms.Label
     $HLELL.Location = New-Object System.Drawing.Size(50,20)
-    $HLELL.Size = New-Object System.Drawing.Size(80,23)
+    $HLELL.Size = New-Object System.Drawing.Size(80,30)
     $HLELL.Text = " Hilight Editor `n     (0-255)"
 
     $HLELTR = New-Object System.Windows.Forms.Label
@@ -260,6 +263,7 @@ function BuildGUI
     $ALERT.Text ='Boot Message'
     $ALERT.Width = 350
     $ALERT.Height = 200
+    $ALERT.Icon       = [System.Drawing.Icon]::FromHandle((New-Object System.Drawing.Bitmap -Argument $stream).GetHIcon())
     $ALERT.AutoSize = $true
 
     #ALERT LABELS
