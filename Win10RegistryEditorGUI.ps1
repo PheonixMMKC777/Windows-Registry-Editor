@@ -1,4 +1,4 @@
-﻿# YOOHOO! IF YOU WANNA EDIT THIS CLONE IT FROM GITHUB!
+# YOOHOO! IF YOU WANNA EDIT THIS CLONE IT FROM GITHUB!
 
 #make windows dummy...
 
@@ -29,7 +29,7 @@ function BuildGUI
 
    
 
-    #region Main Menu Buttons
+    #region Main Menu Buttons aka main
 
 
 
@@ -90,6 +90,14 @@ function BuildGUI
     $DBINGB.Size = New-Object System.Drawing.Size(120,46)
     $DBINGB.Text = "Disable Bing in Windows search"
     $DBINGB.Add_Click({Disbing})
+
+    #ADMINWARNING
+    $ALABEL = New-Object System.Windows.Forms.label
+    $ALABEL.Location = New-Object System.Drawing.Size(20,335)
+    $ALABEL.Size = New-Object System.Drawing.Size(300,46)
+    $ALABEL.Text = "Make sure to run with RUNMEGUI.BAT `n     Else nothing will work..."
+
+
 
 
     #endregion Main Menu Buttons
@@ -338,7 +346,8 @@ function BuildGUI
     $main_form.Controls.Add($CPANCC)
     $main_form.Controls.Add($BSODB)
     $main_form.Controls.Add($ALERTB)
-    $main_form.Controls.Add($DBINGB)        
+    $main_form.Controls.Add($DBINGB)      
+    $main_form.Controls.Add($ALABEL)       
 
     $HLEL.AcceptButton = $HLELI
     $HLEL.Add_Shown({$HLELR.Select()})
@@ -384,7 +393,7 @@ function CPANC
     New-ItemProperty -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel\NameSpace\{$Guid}" -Name "(Default)" -Value "$CPLNAME" -PropertyType "String"
     }
     catch{$_
-    throw "SCREWED UP"
+    throw "$_"
     }
 
 
@@ -415,7 +424,7 @@ function HILIGHT
     }
 
     catch{$_   
-    throw "SCREWED UP"
+    throw "$_"
     }
 
 
@@ -446,7 +455,7 @@ function DWUFR
     Set-ItemProperty -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoRebootWithLoggedOnUsers" -Value "1" -PropertyType "DWord"
     }
     catch{$_
-    throw "SCREWED UP"
+    throw "$_"
     }
     $DWUFRTC = New-Object System.Windows.Forms.Form
     $DWUFRTC.Text ='DWUFR'
@@ -468,12 +477,12 @@ function CortanaGUI
     try{
 
     New-Item -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\' -Name 'Windows Search'
-    New-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search' -Name 'AllowCortana' -Value "00000000" -PropertyType "String"
-    Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search' -Name 'AllowCortana' -Value "00000000" -PropertyType "String"
+    New-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search' -Name 'AllowCortana' -Value "00000000" 
+    Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search' -Name 'AllowCortana' -Value "00000000" 
     }
 
     catch{$_
-    throw "SCREWED UP"   
+    throw "$_"   
     }
 
    
@@ -508,7 +517,7 @@ function BSOD
     Set-ItemProperty -Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\kbdhid\Parameters" -Name "CrashOnCtrlScroll" -Value "1"
     }
     catch{$_
-    throw "SCREWED UP"
+    throw "$_"
     }
     #BSOD windows
     $BSOD = New-Object System.Windows.Forms.Form
@@ -537,7 +546,7 @@ function ALERT
     Set-ItemProperty -path "REGISTRY::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\" -Name "legalnoticetext" -Value "$LNT"
     }
     catch{$_
-    throw "SCRWED UP"
+    throw "$_"
     }
         #Retards dead windows.
     $DCWF = New-Object System.Windows.Forms.Form
@@ -561,13 +570,13 @@ function ALERT
 function Disbing
 {
    try{
-    New-Item -path -path "REGISTRY::HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\" -Name "Explorer"
+    New-Item -path "REGISTRY::HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\" -Name "Explorer"
     New-ItemProperty -path "REGISTRY::HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer\" -Name "DisableSearchBoxSuggestions" -Value "1"
     Set-ItemProperty -path "REGISTRY::HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer\" -Name "DisableSearchBoxSuggestions" -Value "1"
     }
 
     catch{$_
-    throw "SCREWED UP"
+    throw "$_"
     
     }
         #Retards dead windows.
