@@ -33,6 +33,8 @@ Scripts are disabled on this machine...
 	Disable WU Force reboot while online 
 	BSOD keystroke
 	Custom Startup Menu Text
+	Disable bing search in searchbar
+	Disable Lock Screen
 	
 	
 	
