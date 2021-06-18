@@ -1,4 +1,4 @@
-# YOOHOO! IF YOU WANNA EDIT THIS CLONE IT FROM GITHUB!
+﻿# YOOHOO! IF YOU WANNA EDIT THIS CLONE IT FROM GITHUB!
 
 #make windows dummy...
 
@@ -42,6 +42,14 @@ function BuildGUI
     $HLELBUT.Size = New-Object System.Drawing.Size(120,46)
     $HLELBUT.Text = "Hilight Editor"
     $HLELBUT.Add_Click({$HLEL.ShowDialog()})
+
+
+    #DISABLELS
+    $DLS = New-Object System.Windows.Forms.Button
+    $DLS.Location = New-Object System.Drawing.Size(300,200)
+    $DLS.Size = New-Object System.Drawing.Size(120,23)
+    $DLS.Text = "Disable Lock Screen"
+    $DLS.Add_Click({DisableLS})
 
 
     #Disable Retard for Main
@@ -347,7 +355,8 @@ function BuildGUI
     $main_form.Controls.Add($BSODB)
     $main_form.Controls.Add($ALERTB)
     $main_form.Controls.Add($DBINGB)      
-    $main_form.Controls.Add($ALABEL)       
+    $main_form.Controls.Add($ALABEL) 
+    $main_form.Controls.Add($DLS)          
 
     $HLEL.AcceptButton = $HLELI
     $HLEL.Add_Shown({$HLELR.Select()})
@@ -595,6 +604,32 @@ function Disbing
     $DCWF.ShowDialog()
 
 }
+
+
+
+function DisableLS 
+{
+    New-Item -Path "REGISTRY::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\" -Name "Personalization"
+
+    New-ItemProperty -Path "REGISTRY::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization" -Name "NoLockScreen" -Value "01"
+    #say retards dead
+
+            #Retards dead windows.
+    $DCWF = New-Object System.Windows.Forms.Form
+    $DCWF.Text ='DCW'
+    $DCWF.Width = 200
+    $DCWF.Height = 200
+    $DCWF.AutoSize = $true
+
+    #say retards dead
+    $DCWFC = New-Object System.Windows.Forms.Label
+    $DCWFC.Location = New-Object System.Drawing.Size(0,0)
+    $DCWFC.Size = New-Object System.Drawing.Size(180,180)
+    $DCWFC.Text = "Task Finished Succesfully!"
+    $DCWF.Controls.Add($DCWFC)
+    $DCWF.ShowDialog()
+}
+
 
 
 #Execute the function
