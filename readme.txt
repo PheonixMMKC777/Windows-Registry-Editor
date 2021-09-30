@@ -8,7 +8,10 @@ In theory it would work with Windows 7/8 but dont expect 100% compatibility.
 Run RUNME.BAT with admin privledges!!!!!!!!
 
 If you get an error saying 
-Scripts are disabled on this machine...
+File cannot be loaded because running scripts is disabled on this system. For more information, see
+about_Execution_Policies at https:/go.microsoft.com/fwlink/?LinkID=135170.
+    + CategoryInfo          : SecurityError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : UnauthorizedAccess
 
 1. Click the windows button and type powershell.
 2. In the little menu on tthe right, click run as administrator.
