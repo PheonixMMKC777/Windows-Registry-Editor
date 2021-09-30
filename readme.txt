@@ -15,7 +15,7 @@ about_Execution_Policies at https:/go.microsoft.com/fwlink/?LinkID=135170.
 
 1. Click the windows button and type powershell.
 2. In the little menu on tthe right, click run as administrator.
-3. type this commmand:	set-executionpolicy remotesigned
+3. type this commmand:	set-executionpolicy unrestricted
 4. At the prompt press Y to enable the script.
 5. Now the script will run!! 
 
